@@ -14,13 +14,20 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,10 +55,22 @@ class AboutActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun About() {
+    //mutable means changeable.
+    //Remember is
+
+    var name by remember {
+          mutableStateOf(TextFieldValue(""))
+       }
+
+    var email by remember {
+        mutableStateOf(TextFieldValue(""))
+    }
+
     //Column---puts different texts on two separate lines (columns)to avoid overlapping.
       // It must start with a capital 'C'
     //The contents inside the column are inside the call88ibraces
     //
+
     Column (
         modifier = Modifier//The Css of android
             .background(Color(0xFF01454B))
@@ -60,7 +80,24 @@ fun About() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
 //alignments and also arrangements are not part of modifiers so they are separate using commas
-    ){
+    )
+    {
+        //
+        TextField(
+            value = name,
+            onValueChange ={name=it}
+        )
+        Spacer(
+            modifier = Modifier
+            .height(10.dp)
+        )
+        // OutlineTextField is more styled compared to TextField
+        //labels act as placeholders
+        OutlinedTextField(
+            value = email,
+            onValueChange ={name=it},
+            label = { Text(text = "EMAIL")}
+        )
         Text(
             //styling/modifier for the text
             text = "This is the about screen.",
@@ -98,10 +135,11 @@ fun About() {
         )
         //modifiers can't be used for the general button
         Button(onClick = { /*TODO*/ },
-            colors = ButtonDefaults.buttonColors(Color(0xFF01272B)),
-            shape = RoundedCornerShape(10.dp)
-
+            colors = ButtonDefaults.buttonColors(Color
+                (0xFF01272B)
+            )
         )
+
         {
             Text(
                 text = "Our services",
