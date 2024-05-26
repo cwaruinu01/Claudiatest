@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +17,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.currentCompositionLocalContext
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -38,7 +40,9 @@ class MainActivity : ComponentActivity() {
 fun Greeting() {
     val about= LocalContext.current
     val login= LocalContext.current
-    Column {
+    val proxy= LocalContext.current
+    Column(horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center) {
 
 
          Text(text = "WELCOME")
@@ -56,6 +60,12 @@ fun Greeting() {
             colors = ButtonDefaults.buttonColors(Color(0xFF01272B)),
         ) {
             Text(text = "Login")
+        }
+        Button(
+            onClick = { login.startActivity(Intent(proxy, ProxyAssignmentActivity::class.java)) },
+            colors = ButtonDefaults.buttonColors(Color(0xFF01272B)),
+        ) {
+            Text(text = "Proxy")
         }
     }
 }
