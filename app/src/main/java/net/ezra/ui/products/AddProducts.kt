@@ -212,10 +212,9 @@ fun AddJobpostScreen(navController: NavController, onProductAdded: () -> Unit) {
                             jobNameError = jobName.isBlank()
                             jobDescriptionError = jobDescription.isBlank()
                             jobSalaryError = jobSalary.isBlank()
-                            jobSocialmediaError = jobSocialmedia.isBlank()
                             jobEmailError = jobEmail.isBlank()
                             jobCompanyError = jobCompany.isBlank()
-
+                            jobSocialmediaError = jobSocialmedia.isBlank()
                             jobImageError = jobImageUri == null
 
                             // Add product if all fields are filled
@@ -227,9 +226,10 @@ fun AddJobpostScreen(navController: NavController, onProductAdded: () -> Unit) {
                                     jobDescription,
                                     jobSalary.toDouble(),
                                     jobImageUri,
+                                    jobEmail,
                                     jobCompany,
                                     jobSocialmedia,
-                                    jobEmail
+
                                 )
                             }
                         },
@@ -247,8 +247,8 @@ fun AddJobpostScreen(navController: NavController, onProductAdded: () -> Unit) {
     )
 }
 
-private fun addProductToFirestore(navController: NavController, onProductAdded: () -> Unit, jobName: String, jobDescription: String, jobSalary: Double, jobImageUri: Uri?,jobSocialmedia :String , jobEmail:String ,jobCompany:String) {
-    if (jobName.isEmpty() || jobDescription.isEmpty() || jobSalary.isNaN() || jobImageUri == null || jobCompany.isEmpty() || jobEmail.isEmpty() || jobSocialmedia.isEmpty()) {
+private fun addProductToFirestore(navController: NavController, onProductAdded: () -> Unit, jobName: String, jobDescription: String, jobSalary: Double, jobImageUri: Uri? , jobEmail:String ,jobCompany:String,jobSocialmedia :String) {
+    if (jobName.isEmpty() || jobDescription.isEmpty() || jobSalary.isNaN() || jobImageUri == null ||  jobEmail.isEmpty() || jobSocialmedia.isEmpty()||jobCompany.isEmpty() ) {
         // Validate input fields
         return
     }
