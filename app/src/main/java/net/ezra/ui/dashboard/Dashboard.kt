@@ -4,6 +4,9 @@ package net.ezra.ui.dashboard
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Intent
+import android.net.Uri
+import android.provider.ContactsContract
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -17,9 +20,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -33,6 +41,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -46,14 +55,16 @@ import net.ezra.navigation.ROUTE_LOGIN
 
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.firestore
+import net.ezra.navigation.ROUTE_ADD_PRODUCT
 import net.ezra.navigation.ROUTE_ADD_STUDENTS
 import net.ezra.navigation.ROUTE_DASHBOARD
 import net.ezra.navigation.ROUTE_HOME
-
+import net.ezra.navigation.ROUTE_REGISTER
+import net.ezra.navigation.ROUTE_VIEW_PROD
 
 private var progressDialog: ProgressDialog? = null
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "QueryPermissionsNeeded")
 @Composable
 fun DashboardScreen(navController: NavHostController)  {
     var school by remember { mutableStateOf("") }
@@ -73,6 +84,8 @@ fun DashboardScreen(navController: NavHostController)  {
 
 
     val context = LocalContext.current
+
+    val profile=LocalContext.current
 
     BackHandler {
         navController.popBackStack()
@@ -113,10 +126,10 @@ fun DashboardScreen(navController: NavHostController)  {
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = "Dashboard", color = Color.White, fontSize = 30.sp)
+                    Text(text = "", color = Color.White, fontSize = 30.sp)
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xff0FB06A),
+                    containerColor = Color(0xffb22e6f),
                     titleContentColor = Color.White,
                 ),
                 navigationIcon = {
@@ -128,11 +141,12 @@ fun DashboardScreen(navController: NavHostController)  {
 
 
             )
-        }, content = {
+        },
+        content = {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0xff9AEDC9)),
+                    .background(Color(0xfffcf3e0)),
 //                verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
 
@@ -142,37 +156,94 @@ fun DashboardScreen(navController: NavHostController)  {
 //                            Dashboard starts here
 
                             val dashboardItems = listOf(
+//                                DashboardItemData(
+//                                    title = "Profile",
+//                                    icon = Icons.Default.AccountCircle,
+//                                    badgeCount = 0,
+//                                    onClick = {
+//
+//                                    }
+//                                ),
+
                                 DashboardItemData(
-                                    title = "Profile",
-                                    icon = Icons.Default.AccountCircle,
+                                    title = "Add Jobs",
+                                    icon = Icons.Default.Add,
                                     badgeCount = 0,
                                     onClick = {
-                                        // Navigate to profile screen
+                                        navController.navigate(ROUTE_ADD_PRODUCT)
+                                        // Navigate to messages screen
                                     }
                                 ),
                                 DashboardItemData(
-                                    title = "Settings",
-                                    icon = Icons.Default.Settings,
-                                    badgeCount = 3,
+                                    title = "View Jobs",
+                                    icon = Icons.Default.Face,
+                                    badgeCount = 0,
                                     onClick = {
+                                        navController.navigate(ROUTE_VIEW_PROD)
+                                        // Navigate to messages screen
+                                    }
+                                ),
+                                DashboardItemData(
+                                    title = "LinkedIn",
+                                    icon = Icons.Default.Done,
+                                    badgeCount = 0,
+                                    onClick = {
+                                        val linkedInUrl = "https://www.linkedin.com"
+                                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(linkedInUrl))
+                                        context.startActivity(intent)
+//                                        navController.navigate(ROUTE_VIEW_PROD)
+//                                        // Navigate to messages screen
+                                    }
+                                ),
+                                DashboardItemData(
+                                    title = "Email",
+                                    icon = Icons.Default.MailOutline,
+                                    badgeCount = 0,
+                                    onClick = {
+                                        val gmailUrl = "https://mail.google.com"
+                                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(gmailUrl))
+                                        context.startActivity(intent)
                                         // Navigate to settings screen
                                     }
                                 ),
                                 DashboardItemData(
-                                    title = "Students",
-                                    icon = Icons.Default.Person,
-                                    badgeCount = 4,
+                                    title = "Instagram",
+                                    icon = Icons.Default.AccountCircle,
+                                    badgeCount = 0,
                                     onClick = {
+                                        val instagramUrl = "https://www.instagram.com"
+                                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(instagramUrl))
+                                        context.startActivity(intent)
                                         // Navigate to messages screen
                                     }
                                 ),
+                                DashboardItemData(
+                                    title = "X",
+                                    icon = Icons.Default.Clear,
+                                    badgeCount = 0,
+                                    onClick = {
+                                        val twitterUrl = "https://www.twitter.com"
+                                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(twitterUrl))
+                                        context.startActivity(intent)
+                                        // Navigate to messages screen
+                                    }
+                                ),
+//                                DashboardItemData(
+//                                    title = "Contact",
+//                                    icon = Icons.Default.Phone,
+//                                    badgeCount = 0,
+//                                    onClick = {
+//                                        // Navigate to settings screen
+//                                    }
+//                                ),
+
                                 // Add more dashboard items as needed
                             )
 
 
 
                             LazyVerticalGrid(
-                                columns = GridCells.Fixed(2),
+                                columns = GridCells.Fixed(1),
                                 modifier = Modifier.padding(16.dp)
                             ) {
                                 items(dashboardItems) { item ->
@@ -216,7 +287,7 @@ fun DashboardItem(item: DashboardItemData) {
             .padding(8.dp),
         shape = RoundedCornerShape(8.dp),
         elevation = 8.dp,
-        backgroundColor = Color.White,
+        backgroundColor = Color(0xfffcf3e0),
         onClick = item.onClick
     ) {
         Row(
@@ -225,22 +296,25 @@ fun DashboardItem(item: DashboardItemData) {
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = item.icon,
-                contentDescription = "Dashboard Icon",
-                tint = Color.Black,
-                modifier = Modifier.size(36.dp)
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            Text(
-                text = item.title,
-                style = MaterialTheme.typography.subtitle1,
-                color = Color.Black
-            )
-            // Add a badge if the badge count is greater than 0
-            if (item.badgeCount > 0) {
-                Badge(count = item.badgeCount)
+            Column {
+                Icon(
+                    imageVector = item.icon,
+                    contentDescription = "Dashboard Icon",
+                    tint = Color.Black,
+                    modifier = Modifier.size(36.dp)
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                Text(
+                    text = item.title,
+                    style = MaterialTheme.typography.subtitle1,
+                    color = Color.Black
+                )
+                // Add a badge if the badge count is greater than 0
+                if (item.badgeCount > 0) {
+                    Badge(count = item.badgeCount)
+                }
             }
+
         }
     }
 }
@@ -288,3 +362,24 @@ fun saveUserDetails(user: User, param: (Any) -> Unit) {
             // Handle failure
         }
 }
+
+//@Composable
+//fun LinkedInButton() {
+//    val context = LocalContext.current
+//    Button(onClick = {
+//        val linkedInUrl = "https://www.linkedin.com"
+//        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(linkedInUrl))
+//        context.startActivity(intent)
+//    }) {
+//        Text(text = "Open LinkedIn")
+//    }
+//}
+//
+//@Composable
+//fun MyApp() {
+//    Column {
+//        LinkedInButton()
+//        // Add other composable here
+//    }
+//}
+

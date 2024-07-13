@@ -55,6 +55,7 @@ import net.ezra.navigation.ROUTE_ADD_PRODUCT
 import net.ezra.navigation.ROUTE_ADD_STUDENTS
 import net.ezra.navigation.ROUTE_DASHBOARD
 import net.ezra.navigation.ROUTE_HOME
+import net.ezra.navigation.ROUTE_HOME2
 import net.ezra.navigation.ROUTE_LOGIN
 import net.ezra.navigation.ROUTE_SEARCH
 import net.ezra.navigation.ROUTE_VIEW_PROD
@@ -210,6 +211,20 @@ fun HomeScreen(navController: NavHostController) {
                                 }
                             },
                         text = "view Products",
+                        textAlign = TextAlign.Center,
+                        fontSize = 20.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+
+                    Text(
+                        modifier = Modifier
+
+                            .clickable {
+                                navController.navigate(ROUTE_HOME2) {
+                                    popUpTo(ROUTE_HOME) { inclusive = true }
+                                }
+                            },
+                        text = "Home2",
                         textAlign = TextAlign.Center,
                         fontSize = 20.sp,
                         color = MaterialTheme.colorScheme.onSurface

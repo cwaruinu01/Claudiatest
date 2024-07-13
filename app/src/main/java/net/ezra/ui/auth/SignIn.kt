@@ -3,21 +3,27 @@ package net.ezra.ui.auth
 
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
+import net.ezra.R
 import net.ezra.navigation.ROUTE_DASHBOARD
 import net.ezra.navigation.ROUTE_LOGIN
 import net.ezra.navigation.ROUTE_REGISTER
+import net.ezra.navigation.ROUTE_VIEW_PROD
 
 @Composable
 fun LoginScreen(navController: NavController, onLoginSuccess: () -> Unit) {
@@ -34,29 +40,46 @@ fun LoginScreen(navController: NavController, onLoginSuccess: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .background(Color(0xfffcf3e0)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
 
-        AuthHeader()
-        Text("Login", style = MaterialTheme.typography.h4)
+        Image(painter = painterResource(id = R.drawable.verdictvistalogo2removebgpreview), contentDescription =null )
+
+
+        Text("Login",
+            style = MaterialTheme.typography.h4,
+            color=Color(0xffb22e6f))
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            label = { Text("Email") },
-            modifier = Modifier.fillMaxWidth()
+            label = { Text("Email",
+                color = Color(0xffb22e6f)) },
+            modifier = Modifier,
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color(0xffb22e6f),
+                unfocusedBorderColor = Color(0xffb22e6f)
+            ),
+            shape = RoundedCornerShape(20.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
 
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
-            label = { Text("Password") },
+            label = { Text("Password",
+                color = Color(0xffb22e6f)) },
             visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier,
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color(0xffb22e6f),
+                unfocusedBorderColor = Color(0xffb22e6f)
+            ),
+            shape = RoundedCornerShape(20.dp)
+
         )
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -67,7 +90,7 @@ fun LoginScreen(navController: NavController, onLoginSuccess: () -> Unit) {
 
 
             Button(
-                colors = ButtonDefaults.buttonColors(Color(0xff0FB06A)),
+                colors = ButtonDefaults.buttonColors(Color(0xffb22e6f)),
                 onClick = {
                     if (email.isBlank() || password.isBlank()) {
                         error = "Please fill in all fields"
@@ -84,7 +107,8 @@ fun LoginScreen(navController: NavController, onLoginSuccess: () -> Unit) {
                             }
                     }
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier,
+                shape = RoundedCornerShape(20.dp)
             ) {
                 Text("Login")
             }
@@ -97,7 +121,7 @@ fun LoginScreen(navController: NavController, onLoginSuccess: () -> Unit) {
                             popUpTo(ROUTE_LOGIN) { inclusive = true }
                         }
                     },
-                text = "go to register",
+                text = "Don't have an account? Register",
                 textAlign = TextAlign.Center,
                 color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
             )

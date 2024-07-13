@@ -12,6 +12,9 @@ const val ROUTE_REGISTER = "register"
 const val ROUTE_DASHBOARD = "dashboard"
 const val ROUTE_ADD_PRODUCT = "add_product"
 const val ROUTE_VIEW_PROD = "view_prod"
+const val ROUTE_HOME2= "home2"
+const val ROUTE_DASHBOARD2 = "dashboard2"
+//const val ROUTE_UPD_PROD = "update_prod"
 
 
 
