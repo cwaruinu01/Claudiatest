@@ -156,6 +156,7 @@ fun JobpostListItem(product: Product, onItemClick: (String) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .height(100.dp)
             .clickable { onItemClick(product.id) }
     ) {
         Row(
@@ -167,7 +168,7 @@ fun JobpostListItem(product: Product, onItemClick: (String) -> Unit) {
                 painter = rememberImagePainter(product.imageUrl),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(60.dp)
+                    .size(100.dp)
             )
 
             Spacer(modifier = Modifier.width(16.dp))

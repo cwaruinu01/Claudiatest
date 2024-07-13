@@ -101,15 +101,14 @@ fun JobpostDetailScreen(navController: NavController, productId: String) {
                                 Text(text = "Description")
                                 Text(text = it.description, style = MaterialTheme.typography.body1)
                                 Spacer(modifier = Modifier.height(8.dp))
-                                androidx.compose.material3.Text(text = "Social media")
-                                Text(text = it.socialmedia, style = MaterialTheme.typography.body1)
-                                Spacer(modifier = Modifier.height(8.dp))
                                 androidx.compose.material3.Text(text = "Company")
                                 Text(text = it.company, style = MaterialTheme.typography.body1)
                                 Spacer(modifier = Modifier.height(8.dp))
                                 Text(text = "Email")
                                 Text(text = it.email, style = MaterialTheme.typography.body1)
-
+                                Spacer(modifier = Modifier.height(8.dp))
+                                androidx.compose.material3.Text(text = "Social media")
+                                Text(text = it.socialmedia, style = MaterialTheme.typography.body1)
                             }
 
                         }

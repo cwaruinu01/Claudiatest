@@ -139,7 +139,7 @@ fun AddJobpostScreen(navController: NavController, onProductAdded: () -> Unit) {
                         label = { Text("Post") },
                         modifier = Modifier
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(100.dp))
                     OutlinedTextField(
                         shape = RoundedCornerShape(20.dp),
                         value = jobDescription,
@@ -150,9 +150,11 @@ fun AddJobpostScreen(navController: NavController, onProductAdded: () -> Unit) {
                     Spacer(modifier = Modifier.height(8.dp))
                     OutlinedTextField(
                         shape = RoundedCornerShape(20.dp),
-                        value = jobSocialmedia,
-                        onValueChange = { jobSocialmedia = it },
-                        label = { Text(" social media") },
+                        value = jobSalary,
+                        onValueChange = { jobSalary = it },
+                        label = { Text("Salary") },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        keyboardActions = KeyboardActions(onDone = { /* Handle Done action */ }),
                         modifier = Modifier
                     )
                     Spacer(modifier = Modifier.height(8.dp))
@@ -171,14 +173,12 @@ fun AddJobpostScreen(navController: NavController, onProductAdded: () -> Unit) {
                         label = { Text(" company") },
                         modifier = Modifier
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(50.dp))
                     OutlinedTextField(
                         shape = RoundedCornerShape(20.dp),
-                        value = jobSalary,
-                        onValueChange = { jobSalary = it },
-                        label = { Text("Salary") },
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        keyboardActions = KeyboardActions(onDone = { /* Handle Done action */ }),
+                        value = jobSocialmedia,
+                        onValueChange = { jobSocialmedia = it },
+                        label = { Text(" social media") },
                         modifier = Modifier
                     )
                     Spacer(modifier = Modifier.height(16.dp))
@@ -261,9 +261,9 @@ private fun addProductToFirestore(navController: NavController, onProductAdded: 
         "description" to jobDescription,
         "salary" to jobSalary,
         "imageUrl" to "",
-        "socialmedia" to jobSocialmedia,
+        "email" to jobEmail,
         "company" to jobCompany,
-        "email" to jobEmail
+        "socialmedia" to jobSocialmedia,
     )
 
     firestore.collection("Jobpost").document(productId)
