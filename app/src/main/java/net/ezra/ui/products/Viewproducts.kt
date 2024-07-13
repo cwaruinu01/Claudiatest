@@ -175,7 +175,7 @@ fun JobpostListItem(product: Product, onItemClick: (String) -> Unit) {
             // Product Details
             Column {
                 Text(text = product.name)
-                Text(text = "Price: ${product.salary}")
+                Text(text = "Salary: ${product.salary}")
             }
         }
     }

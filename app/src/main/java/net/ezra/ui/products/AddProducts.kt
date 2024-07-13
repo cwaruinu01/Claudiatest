@@ -259,7 +259,7 @@ private fun addProductToFirestore(navController: NavController, onProductAdded: 
     val productData = hashMapOf(
         "name" to jobName,
         "description" to jobDescription,
-        "Salary" to jobSalary,
+        "salary" to jobSalary,
         "imageUrl" to "",
         "socialMedia" to jobSocialmedia,
         "company" to jobCompany,
