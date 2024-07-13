@@ -212,10 +212,11 @@ fun AddJobpostScreen(navController: NavController, onProductAdded: () -> Unit) {
                             jobNameError = jobName.isBlank()
                             jobDescriptionError = jobDescription.isBlank()
                             jobSalaryError = jobSalary.isBlank()
+                            jobImageError = jobImageUri == null
                             jobEmailError = jobEmail.isBlank()
                             jobCompanyError = jobCompany.isBlank()
                             jobSocialmediaError = jobSocialmedia.isBlank()
-                            jobImageError = jobImageUri == null
+
 
                             // Add product if all fields are filled
                             if (!jobNameError && !jobDescriptionError && !jobSalaryError && !jobImageError && ! jobSocialmediaError && ! jobEmailError && ! jobCompanyError) {
