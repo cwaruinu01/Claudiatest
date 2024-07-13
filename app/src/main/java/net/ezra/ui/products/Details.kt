@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -84,29 +85,36 @@ fun JobpostDetailScreen(navController: NavController, productId: String) {
                     .background(Color(0xfffcf3e0)),
             ) {
                 product?.let {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Image(
-                            painter = rememberAsyncImagePainter(it.imageUrl),
-                            contentDescription = null,
-                            modifier = Modifier.size(300.dp)
-                        )
-                        Text(text = it.name, style = MaterialTheme.typography.h5)
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(text = "salary: ${it.salary}", style = MaterialTheme.typography.subtitle1)
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(text = "Description")
-                        Text(text = it.description, style = MaterialTheme.typography.body1)
-                        Spacer(modifier = Modifier.height(8.dp))
-                        androidx.compose.material3.Text(text = "Social media")
-                        Text(text = it.socialmedia, style = MaterialTheme.typography.body1)
-                        Spacer(modifier = Modifier.height(8.dp))
-                        androidx.compose.material3.Text(text = "Company")
-                        Text(text = it.company, style = MaterialTheme.typography.body1)
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(text = "Email")
-                        Text(text = it.email, style = MaterialTheme.typography.body1)
+                    LazyColumn {
+                        item {
 
+                            Column(modifier = Modifier.padding(16.dp)) {
+                                Image(
+                                    painter = rememberAsyncImagePainter(it.imageUrl),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(300.dp)
+                                )
+                                Text(text = it.name, style = MaterialTheme.typography.h5)
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(text = "salary: ${it.salary}", style = MaterialTheme.typography.subtitle1)
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(text = "Description")
+                                Text(text = it.description, style = MaterialTheme.typography.body1)
+                                Spacer(modifier = Modifier.height(8.dp))
+                                androidx.compose.material3.Text(text = "Social media")
+                                Text(text = it.socialmedia, style = MaterialTheme.typography.body1)
+                                Spacer(modifier = Modifier.height(8.dp))
+                                androidx.compose.material3.Text(text = "Company")
+                                Text(text = it.company, style = MaterialTheme.typography.body1)
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(text = "Email")
+                                Text(text = it.email, style = MaterialTheme.typography.body1)
+
+                            }
+
+                        }
                     }
+
                 }
             }
         }
