@@ -261,7 +261,7 @@ private fun addProductToFirestore(navController: NavController, onProductAdded: 
         "description" to jobDescription,
         "salary" to jobSalary,
         "imageUrl" to "",
-        "socialMedia" to jobSocialmedia,
+        "socialmedia" to jobSocialmedia,
         "company" to jobCompany,
         "email" to jobEmail
     )
